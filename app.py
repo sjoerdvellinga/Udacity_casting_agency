@@ -18,7 +18,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from flask_sqlalchemy import SQLAlchemy
 
 from model import db, create_tables, Movie, Actor, Cast
-from model import queryCastByActor, queryMovieByActor
+from model import queryCastByActor, queryMovieByActor, setup_db
 
 from auth import AuthError, requires_auth
 
@@ -30,7 +30,7 @@ from auth import AuthError, requires_auth
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
-
+    setup_db(app)
     app.secret_key = env.get("APP_SECRET_KEY")
 
     if test_config:
